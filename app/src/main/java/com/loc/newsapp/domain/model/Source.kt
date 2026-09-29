@@ -1,4 +1,4 @@
-package com.loc.newsapp.domain.manager.model
+package com.loc.newsapp.domain.model
 
 data class Source(
     val id: String,
