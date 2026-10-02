@@ -6,6 +6,8 @@ import com.loc.newsapp.domain.usecases.news.NewsUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.onEach
 import androidx.compose.runtime.State
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.flow.launchIn
 import javax.inject.Inject
 
 @HiltViewModel
@@ -21,7 +23,7 @@ class BookMarkViewModel @Inject constructor(
     }
     private fun getArticles(){
         newsUseCases.selectArticles().onEach {
-        _state.value = _state.value.copy(articles = it)
-        }
+        _state.value = _state.value.copy(articles = it.asReversed())
+        }.launchIn(viewModelScope)
     }
 }
