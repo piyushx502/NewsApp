@@ -1,15 +1,19 @@
 package com.loc.newsapp.presentation.common
 
+import androidx.annotation.OptIn
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
+import com.google.accompanist.swiperefresh.SwipeRefresh
+import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.loc.newsapp.domain.model.Article
 import com.loc.newsapp.presentation.onboarding.Dimens.ExtraSmallPadding2
 import com.loc.newsapp.presentation.onboarding.Dimens.MediumPadding1
@@ -44,21 +48,30 @@ fun ArticleList(
 ) {
     val handlePagingResult = handlePagingResult(articles = articles)
     if (handlePagingResult) {
-        LazyColumn(
-            modifier = modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.spacedBy(MediumPadding1),
-            contentPadding = PaddingValues(all = ExtraSmallPadding2)
-        ) {
-            items(count = articles.itemCount) {
-                articles[it]?.let {
-                    ArticleCard(
-                        article = it,
-                        onClick = { onClick(it) }
-                    )
-                }
-            }
 
+        val isRefreshing = articles.loadState.refresh is LoadState.Loading
+        SwipeRefresh(
+            state = rememberSwipeRefreshState(isRefreshing),
+            onRefresh = { articles.refresh() },
+            modifier = modifier
+        ){
+            LazyColumn(
+                modifier = Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.spacedBy(MediumPadding1),
+                contentPadding = PaddingValues(all = ExtraSmallPadding2)
+            ) {
+                items(count = articles.itemCount) {
+                    articles[it]?.let {
+                        ArticleCard(
+                            article = it,
+                            onClick = { onClick(it) }
+                        )
+                    }
+                }
+
+            }
         }
+
     }
 }
 

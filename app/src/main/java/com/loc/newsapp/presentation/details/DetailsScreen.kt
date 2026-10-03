@@ -43,8 +43,10 @@ fun DetailsScreen(
             onBrowsingClick = {
                 Intent(Intent.ACTION_VIEW).also {
                     it.data = Uri.parse(article.url)
-                    if (it.resolveActivity(context.packageManager) != null) {
+                    try {
                         context.startActivity(it)
+                    } catch (e: Exception) {
+                        e.printStackTrace()
                     }
                 }
             },
@@ -52,9 +54,10 @@ fun DetailsScreen(
                 Intent(Intent.ACTION_SEND).also {
                     it.putExtra(Intent.EXTRA_TEXT, article.url)
                     it.type = "text/plain"
-                    if (it.resolveActivity(context.packageManager) != null) {
-                        context.startActivity(it)
-
+                    try {
+                        context.startActivity(Intent.createChooser(it, null))
+                    } catch (e: Exception) {
+                        e.printStackTrace()
                     }
                 }
             },
@@ -79,20 +82,23 @@ fun DetailsScreen(
                         .data(article.urlToImage)
                         .build(),
                     contentDescription = null,
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier
+                        .fillMaxWidth()
                         .height(ArticleImageHeight)
                         .clip(MaterialTheme.shapes.medium)
                 )
 
                 Spacer(modifier = Modifier.height(MediumPadding1))
-                Text(text = article.title,
+                Text(
+                    text = article.title,
                     style = MaterialTheme.typography.displaySmall,
                     color = colorResource(
                         id = R.color.text_title
                     )
                 )
 
-                Text(text = article.content,
+                Text(
+                    text = article.content,
                     style = MaterialTheme.typography.bodyMedium,
                     color = colorResource(
                         id = R.color.body
