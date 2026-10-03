@@ -22,10 +22,10 @@ fun NavGraph(
     ) {
         navigation(
             route = Route.AppStartNavigation.route,
-            startDestination = Route.OnBoadingScreen.route
+            startDestination = Route.OnBoardingScreen.route
         ) {
             composable(
-                route = Route.OnBoadingScreen.route,
+                route = Route.OnBoardingScreen.route,
             ) {
                 val viewModel: OnBoardingViewModel = hiltViewModel()
                 OnBoardingScreen(

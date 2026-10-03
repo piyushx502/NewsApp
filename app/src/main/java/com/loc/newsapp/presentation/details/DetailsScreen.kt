@@ -20,7 +20,7 @@ import androidx.compose.ui.res.colorResource
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.loc.newsapp.R
-import com.loc.newsapp.domain.model.Article
+import com.loc.newsapp.domain.model.news.Article
 import com.loc.newsapp.presentation.details.components.DetailsTopBar
 import com.loc.newsapp.presentation.onboarding.Dimens.ArticleImageHeight
 import com.loc.newsapp.presentation.onboarding.Dimens.MediumPadding1

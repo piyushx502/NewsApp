@@ -1,8 +1,8 @@
-package com.loc.newsapp.data.remote
+package com.loc.newsapp.data.news.remote
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.loc.newsapp.domain.model.Article
+import com.loc.newsapp.domain.model.news.Article
 
 class NewsPagingSource(
     private val newsApi: NewsApi, private val sources: String

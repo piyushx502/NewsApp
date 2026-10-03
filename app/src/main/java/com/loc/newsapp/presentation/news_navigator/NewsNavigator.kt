@@ -22,7 +22,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.loc.newsapp.R
-import com.loc.newsapp.domain.model.Article
+import com.loc.newsapp.domain.model.news.Article
 import com.loc.newsapp.presentation.bookmark.BookMarkViewModel
 import com.loc.newsapp.presentation.bookmark.BookmarkScreen
 import com.loc.newsapp.presentation.details.DetailsEvent
@@ -35,6 +35,8 @@ import com.loc.newsapp.presentation.news_navigator.components.BottomNavigationIt
 import com.loc.newsapp.presentation.news_navigator.components.NewsBottomNavigation
 import com.loc.newsapp.presentation.search.SearchScreen
 import com.loc.newsapp.presentation.search.SearchViewModel
+import com.loc.newsapp.presentation.sports.SportsScreen
+import com.loc.newsapp.presentation.sports.SportsViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -45,6 +47,7 @@ fun NewsNavigator() {
             BottomNavigationItem(icon = R.drawable.ic_home, text = "Home"),
             BottomNavigationItem(icon = R.drawable.ic_search, text = "Search"),
             BottomNavigationItem(icon = R.drawable.ic_bookmark, text = "Bookmark"),
+            BottomNavigationItem(icon = R.drawable.ic_close, text = "Sports")
         )
     }
 
@@ -63,7 +66,8 @@ fun NewsNavigator() {
     val isBottomBarVisible = remember(key1 = backStackState) {
         backStackState?.destination?.route == Route.HomeScreen.route ||
                 backStackState?.destination?.route == Route.SearchScreen.route ||
-                backStackState?.destination?.route == Route.BookMarkScreen.route
+                backStackState?.destination?.route == Route.BookMarkScreen.route ||
+                backStackState?.destination?.route == Route.SportsScreen.route
     }
 
     Scaffold(modifier = Modifier.fillMaxSize(), bottomBar = {
@@ -86,6 +90,11 @@ fun NewsNavigator() {
                         2 -> navigateToTab(
                             navController = navController,
                             route = Route.BookMarkScreen.route
+                        )
+
+                        3 -> navigateToTab(
+                            navController = navController,
+                            route = Route.SportsScreen.route
                         )
                     }
                 }
@@ -135,9 +144,11 @@ fun NewsNavigator() {
             composable(route = Route.DetailsScreen.route) {
                 val viewModel: DetailsViewModel = hiltViewModel()
 
-                if (viewModel.sideEffect != null){
-                    Toast.makeText(LocalContext.current,viewModel.sideEffect, Toast.LENGTH_SHORT).show()
-                    viewModel.onEvent(DetailsEvent.RemoveSideEffect
+                if (viewModel.sideEffect != null) {
+                    Toast.makeText(LocalContext.current, viewModel.sideEffect, Toast.LENGTH_SHORT)
+                        .show()
+                    viewModel.onEvent(
+                        DetailsEvent.RemoveSideEffect
                     )
                 }
                 val article = remember {
@@ -165,6 +176,11 @@ fun NewsNavigator() {
                         )
                     }
                 )
+            }
+
+            composable(route = Route.SportsScreen.route) {
+                val viewModel: SportsViewModel = hiltViewModel()
+                SportsScreen(state = viewModel.sports.value)
             }
         }
     }

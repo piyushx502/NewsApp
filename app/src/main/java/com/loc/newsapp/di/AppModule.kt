@@ -2,12 +2,14 @@ package com.loc.newsapp.di
 
 import android.app.Application
 import androidx.room.Room
-import com.loc.newsapp.data.local.NewsDao
-import com.loc.newsapp.data.local.NewsDatabase
-import com.loc.newsapp.data.local.NewsTypeConvertor
-import com.loc.newsapp.data.manager.LocalUserManagerImpl
-import com.loc.newsapp.data.remote.NewsApi
-import com.loc.newsapp.data.repository.NewsRepositoryImpl
+import com.loc.newsapp.data.news.local.NewsDao
+import com.loc.newsapp.data.news.local.NewsDatabase
+import com.loc.newsapp.data.news.local.NewsTypeConvertor
+import com.loc.newsapp.data.news.manager.LocalUserManagerImpl
+import com.loc.newsapp.data.news.remote.NewsApi
+import com.loc.newsapp.data.news.repository.NewsRepositoryImpl
+import com.loc.newsapp.data.sports.remote.dto.SportsApi
+import com.loc.newsapp.data.sports.repository.SportsRepositoryImpl
 import com.loc.newsapp.domain.manager.LocalUserManager
 import com.loc.newsapp.domain.repository.NewsRepository
 import com.loc.newsapp.domain.usecases.app_entry.AppEntryUseCases
@@ -20,6 +22,8 @@ import com.loc.newsapp.domain.usecases.news.SearchNews
 import com.loc.newsapp.domain.usecases.news.SelectArticle
 import com.loc.newsapp.domain.usecases.news.SelectArticles
 import com.loc.newsapp.domain.usecases.news.UpsertArticles
+import com.loc.newsapp.domain.usecases.sports.GetSports
+import com.loc.newsapp.domain.usecases.sports.SportsRepository
 import com.loc.newsapp.util.Constants.BASE_URL
 import dagger.Module
 import dagger.Provides
@@ -29,6 +33,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
 import javax.inject.Singleton
+import kotlin.jvm.java
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -105,5 +110,32 @@ object AppModule {
     fun provideNewsDao(
         newsDatabase: NewsDatabase
     ): NewsDao = newsDatabase.newsDao
+
+
+    @Provides
+    @Singleton
+    fun provideSportsApi(): SportsApi {
+        return Retrofit.Builder()
+            .baseUrl("https://www.thesportsdb.com/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(SportsApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideSportsRepository(
+        sportsApi: SportsApi
+    ): SportsRepository {
+        return SportsRepositoryImpl(sportsApi)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetSportsUseCase(
+        sportsRepository: SportsRepository
+    ): GetSports {
+        return GetSports(sportsRepository)
+    }
 
 }

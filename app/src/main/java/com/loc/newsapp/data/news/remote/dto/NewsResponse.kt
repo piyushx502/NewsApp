@@ -1,6 +1,6 @@
-package com.loc.newsapp.data.remote.dto
+package com.loc.newsapp.data.news.remote.dto
 
-import com.loc.newsapp.domain.model.Article
+import com.loc.newsapp.domain.model.news.Article
 
 data class NewsResponse(
     val articles: List<Article>,

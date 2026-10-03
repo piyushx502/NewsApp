@@ -1,8 +1,7 @@
 package com.loc.newsapp.presentation.search
 
 import androidx.paging.PagingData
-import androidx.room.Query
-import com.loc.newsapp.domain.model.Article
+import com.loc.newsapp.domain.model.news.Article
 import kotlinx.coroutines.flow.Flow
 
 data class SearchState(

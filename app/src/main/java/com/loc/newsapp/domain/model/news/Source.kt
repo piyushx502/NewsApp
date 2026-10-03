@@ -1,4 +1,4 @@
-package com.loc.newsapp.domain.model
+package com.loc.newsapp.domain.model.news
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

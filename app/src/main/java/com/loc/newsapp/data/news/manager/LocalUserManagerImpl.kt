@@ -1,4 +1,4 @@
-package com.loc.newsapp.data.manager
+package com.loc.newsapp.data.news.manager
 
 import android.content.Context
 import androidx.datastore.core.DataStore

@@ -23,10 +23,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.paging.compose.LazyPagingItems
 import com.loc.newsapp.R
-import com.loc.newsapp.domain.model.Article
+import com.loc.newsapp.domain.model.news.Article
 import com.loc.newsapp.presentation.common.ArticleList
 import com.loc.newsapp.presentation.common.SearchBar
-import com.loc.newsapp.presentation.navgraph.Route
 import com.loc.newsapp.presentation.onboarding.Dimens.MediumPadding1
 
 

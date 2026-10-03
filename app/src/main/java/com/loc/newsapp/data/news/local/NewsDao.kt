@@ -1,11 +1,11 @@
-package com.loc.newsapp.data.local
+package com.loc.newsapp.data.news.local
 
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.loc.newsapp.domain.model.Article
+import com.loc.newsapp.domain.model.news.Article
 import kotlinx.coroutines.flow.Flow
 
 @Dao

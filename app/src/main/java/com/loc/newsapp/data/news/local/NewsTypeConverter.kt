@@ -1,8 +1,8 @@
-package com.loc.newsapp.data.local
+package com.loc.newsapp.data.news.local
 
 import androidx.room.ProvidedTypeConverter
 import androidx.room.TypeConverter
-import com.loc.newsapp.domain.model.Source
+import com.loc.newsapp.domain.model.news.Source
 
 @ProvidedTypeConverter
 class NewsTypeConvertor {

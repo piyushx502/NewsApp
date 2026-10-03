@@ -9,7 +9,7 @@ import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.paging.compose.collectAsLazyPagingItems
-import com.loc.newsapp.domain.model.Article
+import com.loc.newsapp.domain.model.news.Article
 import com.loc.newsapp.presentation.common.ArticleList
 import com.loc.newsapp.presentation.common.SearchBar
 import com.loc.newsapp.presentation.onboarding.Dimens.MediumPadding1

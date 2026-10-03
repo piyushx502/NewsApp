@@ -27,8 +27,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.loc.newsapp.R
-import com.loc.newsapp.domain.model.Article
-import com.loc.newsapp.domain.model.Source
+import com.loc.newsapp.domain.model.news.Article
+import com.loc.newsapp.domain.model.news.Source
 import com.loc.newsapp.presentation.onboarding.Dimens.ArticleCardSize
 import com.loc.newsapp.presentation.onboarding.Dimens.ExtraSmallPadding
 import com.loc.newsapp.presentation.onboarding.Dimens.ExtraSmallPadding2

@@ -1,7 +1,6 @@
 package com.loc.newsapp.domain.usecases.news
 
-import com.loc.newsapp.data.local.NewsDao
-import com.loc.newsapp.domain.model.Article
+import com.loc.newsapp.domain.model.news.Article
 import com.loc.newsapp.domain.repository.NewsRepository
 
 class UpsertArticles(
