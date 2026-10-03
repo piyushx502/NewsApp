@@ -50,11 +50,10 @@ fun SuggestionCards(
         }
         Row(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(MediumPadding1)
+            horizontalArrangement = Arrangement.Center
         ) {
             SearchCard(
                 category = categories[4],
-                modifier = Modifier.weight(1f),
                 onClick = { onCategorySelected(categories[4]) })
             Spacer(modifier = Modifier.weight(1f))
         }

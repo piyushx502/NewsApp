@@ -33,9 +33,11 @@ class SearchViewModel @Inject constructor(
         val articles = newsUseCases.searchNews(
             searchQuery = state.value.searchQuery,
             sources = listOf(
-                "bbc-news",
-                "abc-news",
-                "al-jazeera-english"
+                "bbc-news", "abc-news", "al-jazeera-english", "cnn",
+                "the-new-york-times", "the-wall-street-journal", "the-washington-post",
+                "bloomberg", "business-insider", "cbs-news", "entertainment-weekly",
+                "espn", "fox-news", "nbc-news", "reuters", "techcrunch",
+                "the-verge", "time", "wired", "usa-today"
             )
         ).cachedIn(viewModelScope)
 

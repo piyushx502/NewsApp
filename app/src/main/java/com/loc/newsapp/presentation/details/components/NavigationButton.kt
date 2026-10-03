@@ -71,8 +71,6 @@ fun DetailsTopBar(
 
     )
 }
-
-
 @Preview
 @Composable
 fun DetailsTopBarPreview(){
