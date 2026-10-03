@@ -13,6 +13,7 @@ import com.loc.newsapp.domain.model.Article
 import com.loc.newsapp.presentation.common.ArticleList
 import com.loc.newsapp.presentation.common.SearchBar
 import com.loc.newsapp.presentation.onboarding.Dimens.MediumPadding1
+import com.loc.newsapp.presentation.search.component.SuggestionCards
 
 @Composable
 fun SearchScreen(
@@ -36,12 +37,22 @@ fun SearchScreen(
             onSearch = { event(SearchEvent.SearchNews) }
         )
         Spacer(modifier = Modifier.height(MediumPadding1))
+        SuggestionCards(
+            onCategorySelected = { category ->
+                event(SearchEvent.UpdateSearchQuery(category))
+                event(SearchEvent.SearchNews)
+            }
+        )
+        Spacer(modifier = Modifier.height(MediumPadding1))
+
+
         state.articles?.let {
             val articles = it.collectAsLazyPagingItems()
             ArticleList(articles =articles,onClick = {
                 article -> navigateToDetails(article)
             })
         }
+
 
     }
 }
