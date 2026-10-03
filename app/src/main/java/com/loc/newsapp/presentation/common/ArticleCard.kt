@@ -1,15 +1,21 @@
 package com.loc.newsapp.presentation.common
 
 import android.content.res.Configuration
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -24,6 +30,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.loc.newsapp.R
@@ -43,60 +50,76 @@ fun ArticleCard(
     article: Article
 ) {
     val context = LocalContext.current
-    Row(
-        modifier = modifier.clickable {
-            onClick()
-        }
-    ) {
-        AsyncImage(
-            modifier = Modifier.size(ArticleCardSize)
-                .clip(MaterialTheme.shapes.medium),
-            model = ImageRequest.Builder(context)
-                .data(article.urlToImage)
-                .build(),
-            contentDescription = null,
-            contentScale = ContentScale.Crop
-            )
-        Column(
-            verticalArrangement = Arrangement.SpaceAround,
-            modifier = Modifier.padding(horizontal = ExtraSmallPadding)
-                .height(ArticleCardSize)
+
+    Card(colors = CardDefaults.cardColors(containerColor = colorResource(id = R.color.input_background)),
+        border = BorderStroke(1.dp, colorResource(id = R.color.placeholder)),
+        shape = MaterialTheme.shapes.medium,
+        modifier = modifier.fillMaxWidth()) {
+        Row(
+            modifier = modifier
+                .clip(MaterialTheme.shapes.medium)
+                .border(width = 1.dp,
+                    color = colorResource(id = R.color.body),
+                    shape = MaterialTheme.shapes.medium)
+                .padding(8.dp)
+                .clickable {
+                    onClick()
+
+                }
         ) {
-            Text(
-                text = article.title,
-                style = MaterialTheme.typography.bodyMedium,
-                color = colorResource(
-                    id = R.color.text_title
-                ),
-                maxLines = 2,
-                overflow = TextOverflow.Ellipsis
+            AsyncImage(
+                modifier = Modifier.size(ArticleCardSize)
+                    .clip(MaterialTheme.shapes.medium),
+                model = ImageRequest.Builder(context)
+                    .data(article.urlToImage)
+                    .build(),
+                contentDescription = null,
+                contentScale = ContentScale.Crop
             )
-            Row(verticalAlignment =  Alignment.CenterVertically) {
+            Column(
+                verticalArrangement = Arrangement.SpaceAround,
+                modifier = Modifier.padding(horizontal = ExtraSmallPadding)
+                    .height(ArticleCardSize)
+            ) {
                 Text(
-                    text = article.source.name,
-                    style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
+                    text = article.title,
+                    style = MaterialTheme.typography.bodyMedium,
                     color = colorResource(
-                        id = R.color.body
+                        id = R.color.text_title
+                    ),
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis
+                )
+                Row(verticalAlignment =  Alignment.CenterVertically) {
+                    Text(
+                        text = article.source.name,
+                        style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
+                        color = colorResource(
+                            id = R.color.body
+                        )
                     )
-                )
-                Spacer(modifier = Modifier.width(ExtraSmallPadding2))
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_time),
-                    contentDescription = null,
-                    modifier = Modifier.size(SmallIconSize),
-                    tint = colorResource(id = R.color.body)
-                )
-                Text(
-                    text = article.publishedAt,
-                    style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
-                    color = colorResource(
-                        id = R.color.body
+                    Spacer(modifier = Modifier.width(ExtraSmallPadding2))
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_time),
+                        contentDescription = null,
+                        modifier = Modifier.size(SmallIconSize),
+                        tint = colorResource(id = R.color.body)
                     )
-                )
+                    Text(
+                        text = article.publishedAt,
+                        style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
+                        color = colorResource(
+                            id = R.color.body
+                        )
+                    )
+                }
             }
+
         }
 
     }
+
+
 }
 
 @Preview(showBackground = true)
