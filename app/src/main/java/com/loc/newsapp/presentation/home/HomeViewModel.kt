@@ -13,7 +13,11 @@ class HomeViewModel @Inject constructor(
 ): ViewModel() {
 
     val news =newsUseCases.getNews(
-        sources = listOf("bbc-news", "abc-news", "al-jazeera-english")
+        sources = listOf("bbc-news", "abc-news", "al-jazeera-english", "cnn",
+            "the-new-york-times", "the-wall-street-journal", "the-washington-post",
+            "bloomberg", "business-insider", "cbs-news", "entertainment-weekly",
+            "espn", "fox-news", "nbc-news", "reuters", "techcrunch",
+            "the-verge", "time", "wired", "usa-today")
     ).cachedIn(viewModelScope)
 
 }
