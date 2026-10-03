@@ -2,10 +2,12 @@ package com.loc.newsapp.presentation.news_navigator.components
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.annotation.DrawableRes
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -16,6 +18,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -31,34 +34,43 @@ fun NewsBottomNavigation(
     selectedItem: Int,
     onItemClick: (Int) -> Unit
 ) {
-    NavigationBar(
-        modifier = Modifier.fillMaxWidth(),
-        containerColor = MaterialTheme.colorScheme.background,
-        tonalElevation = 10.dp
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(
+                horizontal = 16.dp,
+                vertical = 12.dp
+            ).clip(shape = MaterialTheme.shapes.extraLarge)
     ) {
-        items.forEachIndexed { index, item ->
-            NavigationBarItem(
-                selected = index == selectedItem,
-                onClick = { onItemClick(index) },
-                icon = {
-                    Column(horizontalAlignment = CenterHorizontally) {
-                        Icon(
-                            painter = painterResource(id = item.icon),
-                            contentDescription = null,
-                            modifier = Modifier.size(IconSize),
-                        )
-                        Spacer(modifier = Modifier.height(ExtraSmallPadding2))
-                        Text(text = item.text, style = MaterialTheme.typography.labelSmall)
-                    }
-                },
-                colors = NavigationBarItemDefaults.colors(
-                    selectedIconColor = MaterialTheme.colorScheme.primary,
-                    selectedTextColor = MaterialTheme.colorScheme.primary,
-                    unselectedIconColor = colorResource(id = R.color.body),
-                    unselectedTextColor = colorResource(id = R.color.body),
-                    indicatorColor = MaterialTheme.colorScheme.background
-                ),
-            )
+        NavigationBar(
+            modifier = Modifier.fillMaxWidth(),
+            containerColor = colorResource(id = R.color.shimmer),
+            tonalElevation = 10.dp
+        ) {
+            items.forEachIndexed { index, item ->
+                NavigationBarItem(
+                    selected = index == selectedItem,
+                    onClick = { onItemClick(index) },
+                    icon = {
+                        Column(horizontalAlignment = CenterHorizontally) {
+                            Icon(
+                                painter = painterResource(id = item.icon),
+                                contentDescription = null,
+                                modifier = Modifier.size(IconSize),
+                            )
+                            Spacer(modifier = Modifier.height(ExtraSmallPadding2))
+                            Text(text = item.text, style = MaterialTheme.typography.labelSmall)
+                        }
+                    },
+                    colors = NavigationBarItemDefaults.colors(
+                        selectedIconColor = MaterialTheme.colorScheme.primary,
+                        selectedTextColor = MaterialTheme.colorScheme.primary,
+                        unselectedIconColor = colorResource(id = R.color.body),
+                        unselectedTextColor = colorResource(id = R.color.body),
+                        indicatorColor = MaterialTheme.colorScheme.background
+                    ),
+                )
+            }
         }
     }
 }
