@@ -4,6 +4,8 @@ An Android app built with Jetpack Compose and the latest android libraries.
 **#Features Added** 
 1. **Pull-to-Refresh:** Swipe down on the news feed to instantly load the newest articles.
 2.  **Quick Search Categories:** Tap on a category card (like Sports or Technology) to instantly fetch news for that topic without having to type.
+3.  **Floating Bottom Navigation:** Added a floating bottom navigation bar with rounded corners, spacing, and elevation for a modern UI.
+4. **LaLiga API Integration:** Integrated the LaLiga API to fetch and display the current league leaderboard, including team rankings, points, wins, draws, and losses.
 
 # Preview 
 <img width="716" alt="Screenshot 2023-08-23 at 4 11 00 PM" src="https://github.com/mohammednawas8/NewsApp/assets/78867217/0ba957e5-8b70-42d6-ab09-2cf38ba3936e"><br>
